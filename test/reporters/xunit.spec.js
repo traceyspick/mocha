@@ -195,11 +195,11 @@ describe('XUnit reporter', function() {
         stdoutWrite = process;
         process = false; // eslint-disable-line no-native-reassign, no-global-assign
 
-        var cachedConsoleLog = reporters.Base.consoleLog;
+        var savedConsoleLog = reporters.Base.consoleLog;
         reporters.Base.consoleLog = stdout.push.bind(stdout);
         var xunit = new XUnit({on: function() {}, once: function() {}});
         xunit.write.call({fileStream: false}, expectedLine);
-        reporters.Base.consoleLog = cachedConsoleLog;
+        reporters.Base.consoleLog = savedConsoleLog;
 
         process = stdoutWrite; // eslint-disable-line no-native-reassign, no-global-assign
         expect(stdout[0], 'to be', expectedLine);
