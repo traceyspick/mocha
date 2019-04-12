@@ -6,8 +6,8 @@ check-leaks: false
 color: true
 delay: false
 diff: true
-exclude:
-  - /path/to/some/excluded/file
+ignore:
+  - /path/to/some/ignored/file
 exit: false # could be expressed as "no-exit: true"
 extension:
   - js
