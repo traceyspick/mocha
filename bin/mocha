@@ -123,7 +123,8 @@ debug('final node args', nodeArgs);
 const args = [].concat(
   unparseNodeFlags(nodeArgs),
   mochaPath,
-  unparse(mochaArgs, {alias: aliases})
+  unparse(mochaArgs, {alias: aliases}),
+  '--preParsedArgs'
 );
 
 debug(`exec ${process.execPath} w/ args:`, args);

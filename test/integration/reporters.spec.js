@@ -40,8 +40,9 @@ describe('reporters', function() {
       var tmpFile = tmpDir + path.sep + 'test-issue-1864-' + randomStr + '.xml';
 
       var args = [
-        '--reporter=xunit',
-        '--reporter-options',
+        '--reporter',
+        'xunit',
+        '--reporter-option',
         'output=' + tmpFile
       ];
       var expectedOutput = [
@@ -70,7 +71,7 @@ describe('reporters', function() {
       var reporterAtARelativePath =
         'test/integration/fixtures/simple-reporter.js';
 
-      var args = ['--reporter=' + reporterAtARelativePath];
+      var args = ['--reporter', reporterAtARelativePath];
 
       run('passing.fixture.js', args, function(err, result) {
         if (err) {
@@ -89,7 +90,7 @@ describe('reporters', function() {
         'test/integration/fixtures/simple-reporter.js'
       );
 
-      var args = ['--reporter=' + reporterAtAnAbsolutePath];
+      var args = ['--reporter', reporterAtAnAbsolutePath];
 
       run('passing.fixture.js', args, function(err, result) {
         if (err) {
@@ -136,7 +137,12 @@ describe('reporters', function() {
     describe('produces valid TAP v13 output', function() {
       var runFixtureAndValidateOutput = function(fixture, expected) {
         it('for ' + fixture, function(done) {
-          var args = ['--reporter=tap', '--reporter-option', 'tapVersion=13'];
+          var args = [
+            '--reporter',
+            'tap',
+            '--reporter-option',
+            'tapVersion=13'
+          ];
 
           run(fixture, args, function(err, res) {
             if (err) {
@@ -201,7 +207,8 @@ describe('reporters', function() {
     it('should fail if given invalid `tapVersion`', function(done) {
       var invalidTapVersion = 'nosuch';
       var args = [
-        '--reporter=tap',
+        '--reporter',
+        'tap',
         '--reporter-option',
         'tapVersion=' + invalidTapVersion
       ];
@@ -229,7 +236,7 @@ describe('reporters', function() {
     });
 
     it('places exceptions correctly in YAML blocks', function(done) {
-      var args = ['--reporter=tap', '--reporter-option', 'tapVersion=13'];
+      var args = ['--reporter', 'tap', '--reporter-option', 'tapVersion=13'];
 
       run('reporters.fixture.js', args, function(err, res) {
         if (err) {
